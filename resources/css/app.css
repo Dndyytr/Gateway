@@ -1,0 +1,869 @@
+@import 'tailwindcss';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-poppins:
+        'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    /* colors */
+    --color-warnaDasarBackground: #eaeff7;
+    --color-warnaBiruTua: #26315a;
+    --color-warnaBiruHover: #5c77db;
+    --color-warnaAbuInput: #e5e3e2;
+    --color-warnaKuning: #ffc700;
+    --color-warnaKuningTombol: #cca202;
+    --color-warnaAbu1: #364151;
+    --color-warnaAbu2: #5b5f6b;
+    --color-warnaAbu3: #5f6d80;
+    --color-warnaAbuChooseFile: #353f4f;
+    --color-warnaBiruTuaTombol: #081527;
+    --color-warnaAbuTombol: #707d90;
+    --color-warnaMerahTombol: #da3653;
+    --color-warnaHijauApprove: #40b370;
+
+    /* breakpoints */
+    --breakpoint-bp575: 575px;
+    --breakpoint-bp400: 400px;
+    --breakpoint-bp360: 360px;
+}
+
+@layer components {
+    /* style notification preferences */
+    .notifPreferences {
+        @apply max-h-max rounded-sm bg-warnaBiruTua px-2 py-1 text-[.65rem] font-medium text-white transition-all duration-300 ease-in-out hover:bg-warnaBiruHover bp360:text-[.7rem] bp400:text-xs sm:text-[.8rem] xl:text-sm 2xl:text-[.9rem];
+    }
+
+    /* hamburger button */
+    .hamburger {
+        @apply h-[2.3px] w-[22px] rounded-2xl bg-warnaBiruTua transition-all duration-300 ease-in-out group-hover:bg-warnaBiruHover bp360:h-[2.5px] bp360:w-[23px] bp400:h-[2.7px] bp400:w-[24px] sm:h-[2.8px] sm:w-[25px] md:h-[3px] md:w-[29px] lg:h-[3.5px] lg:w-[33px] 2xl:h-[3.7px] 2xl:w-[35px];
+    }
+
+    /* boxshadow */
+    .shadow-card {
+        box-shadow: 0 2px 6px 0.5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* animation for page main */
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            transform: translateY(-100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    /* table */
+    .table-data {
+        @apply w-full rounded-xs bg-white text-left shadow-[0_2px_6px_0.5px_rgba(0,0,0,0.2)];
+
+        thead {
+            @apply bg-warnaBiruTua text-white;
+
+            tr th {
+                @apply relative hidden border-r-2 border-l-2 border-white p-2 text-[.63rem] font-semibold break-words whitespace-normal bp360:text-[.68rem] bp575:text-[.7rem] md:table-cell xl:text-xs 2xl:text-sm;
+            }
+
+            th.dt-ordering-asc span.dt-column-order::before,
+            th.dt-ordering-desc span.dt-column-order::after {
+                color: white;
+                opacity: 1 !important;
+            }
+
+            th.dt-orderable-desc span.dt-column-order::before,
+            th.dt-orderable-asc span.dt-column-order::after {
+                font-size: 0.87em;
+                cursor: pointer;
+                opacity: 0.5;
+                right: 5px;
+            }
+
+            tr th:first-child,
+            tr th:last-child {
+                @apply border-none;
+            }
+        }
+
+        th.dt-orderable-desc span.dt-column-order::before {
+            bottom: 43%;
+            content: '\25B2';
+            position: absolute;
+        }
+
+        th.dt-orderable-asc span.dt-column-order::after {
+            top: 43%;
+            content: '\25BC';
+            position: absolute;
+        }
+
+        tbody tr {
+            @apply border-b-2 border-gray-300;
+        }
+        tbody tr:last-child {
+            @apply border-none;
+        }
+
+        tbody tr td {
+            @apply block border-r-2 border-l-2 border-gray-300 p-2 text-[.63rem] font-medium break-words whitespace-normal text-stone-700 bp360:text-[.68rem] bp575:text-[.7rem] md:table-cell xl:text-xs 2xl:text-sm;
+        }
+
+        tbody tr td:before {
+            @apply bg-warnaBiruTua;
+            content: attr(data-cell) ' : ';
+            color: white;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 2px 3px;
+            margin-right: 5px;
+            border-radius: 2px;
+
+            @media screen and (width >= 575px) {
+                font-size: 0.75rem;
+            }
+
+            @media screen and (width >= 768px) {
+                display: none;
+            }
+        }
+
+        tbody tr td:first-child,
+        tbody tr td:last-child {
+            @apply md:border-none;
+        }
+
+        tbody tr:nth-child(even) {
+            @apply bg-warnaDasarBackground;
+        }
+    }
+
+    /* table detail order*/
+    .table-detail-order {
+        tr td:before {
+            @apply bg-warnaKuning;
+            content: attr(data-cell) ' : ';
+            color: #292524;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 2px 3px;
+            margin-right: 5px;
+            border-radius: 2px;
+
+            @media screen and (width >= 360px) {
+                font-size: 0.75rem;
+            }
+
+            @media screen and (width >= 400px) {
+                display: none;
+            }
+        }
+
+        tr:nth-child(even) {
+            @apply bg-warnaDasarBackground;
+        }
+
+        tr td {
+            @apply border-r-[1.8px] border-l-[1.8px] border-stone-300;
+        }
+
+        tr {
+            @apply border-b-[1.8px] border-stone-300;
+        }
+    }
+
+    /* table detail fleet*/
+    .table-detail-fleet {
+        tr td:before {
+            @apply bg-warnaKuning;
+            content: attr(data-cell) ' : ';
+            color: #292524;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 2px 3px;
+            margin-right: 5px;
+            border-radius: 2px;
+
+            @media screen and (width >= 575px) {
+                font-size: 0.75rem;
+            }
+
+            @media screen and (width >= 768px) {
+                display: none;
+            }
+        }
+
+        tr:nth-child(even) {
+            @apply bg-warnaDasarBackground;
+        }
+
+        tr td {
+            @apply border-r-[1.8px] border-l-[1.8px] border-stone-300;
+        }
+
+        tr {
+            @apply border-b-[1.8px] border-stone-300;
+        }
+    }
+
+    input[type='date']::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    input[type='date']::-webkit-calendar-picker-indicator:hover {
+        filter: brightness(0) saturate(100%) invert(17%) sepia(57%) saturate(1663%) hue-rotate(201deg) brightness(96%)
+            contrast(98%);
+    }
+
+    /* login background */
+    .login-background:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 70%;
+        background-color: rgba(255, 255, 255, 0.114);
+        z-index: 1;
+        border-bottom-left-radius: 10rem;
+        border-bottom-right-radius: 4rem;
+    }
+
+    input[type='checkbox'] {
+        @apply border-[0.12rem] border-warnaBiruTua;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        font-size: 2rem;
+        padding: 0.1rem;
+        border-radius: 3px;
+        position: relative;
+    }
+
+    input[type='checkbox']:checked {
+        @apply bg-warnaBiruTua shadow-[0_0_1px_0.4px_var(--color-warnaKuning)];
+
+        &::after {
+            content: '';
+            font-size: 1.5rem;
+            color: white;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-image: url('data:image/svg+xml,%3Csvg%20fill%3D%22%23ffffff%22%20viewBox%3D%220%200%201024%201024%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20stroke%3D%22%23ffffff%22%3E%3Cpath%20d%3D%22M351.605%20663.268l481.761-481.761c28.677-28.677%2075.171-28.677%20103.847%200s28.677%2075.171%200%20103.847L455.452%20767.115l.539.539-58.592%2058.592c-24.994%2024.994-65.516%2024.994-90.51%200L85.507%20604.864c-28.677-28.677-28.677-75.171%200-103.847s75.171-28.677%20103.847%200l162.25%20162.25z%22/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            @media screen and (width >= 360px) {
+                width: 11px;
+                height: 11px;
+            }
+            @media screen and (width >= 400px) {
+                width: 12px;
+                height: 12px;
+            }
+
+            @media screen and (width >= 1536px) {
+                width: 13px;
+                height: 13px;
+            }
+        }
+    }
+
+    .arrow-box::before {
+        content: '';
+        position: absolute;
+        top: -3%;
+        right: 3rem;
+        width: 15px;
+        height: 15px;
+        background-color: white;
+        transform: rotate(45deg);
+        z-index: -1;
+        box-shadow: 0 0 4px 0.4px rgba(0, 0, 0, 0.5);
+
+        @media screen and (width >= 400px) {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media screen and (width >= 575px) {
+            right: 0.5rem;
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    /* shadow input */
+    .shadow-input {
+        box-shadow: inset 0px 0px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* input file */
+    .input-file {
+        @apply w-full cursor-pointer rounded-sm outline-2 transition-all duration-300 ease-in-out file:mr-2 file:cursor-pointer file:bg-warnaAbuChooseFile file:text-white file:transition-all file:duration-300 file:ease-in-out hover:file:bg-stone-900;
+    }
+
+    /* max height for table, dashboard, and CRUD */
+    .bpHeight-1 {
+        max-height: 17vh;
+        @media screen and (height >= 320px) {
+            max-height: 20vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 24vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 30vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 35vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 39vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 50vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 57vh;
+        }
+        @media screen and (height >= 560px) {
+            max-height: 60vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 63vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 59vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 63vh;
+        }
+        @media screen and (height >= 750px) {
+            max-height: 67vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 71vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 75vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 79vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 83vh;
+        }
+        @media screen and (height >= 1100px) {
+            max-height: 87vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 91vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 95vh;
+        }
+        @media screen and (height >= 1500px) {
+            max-height: 99vh;
+        }
+        @media screen and (height >= 1600px) {
+            max-height: 100vh;
+        }
+        /* @media screen and (height >= 1700px) {
+            max-height: 72vh;
+        } */
+    }
+
+    .bpHeight-2 {
+        max-height: 31vh;
+        @media screen and (height >= 320px) {
+            max-height: 33vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 38vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 44vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 49vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 52vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 58vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 67vh;
+        }
+        @media screen and (height >= 560px) {
+            max-height: 70vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 73vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 67vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 70vh;
+        }
+
+        @media screen and (height >= 750px) {
+            max-height: 73vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 76vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 79vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 82vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 85vh;
+        }
+        @media screen and (height >= 1100px) {
+            max-height: 88vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 91vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 94vh;
+        }
+        @media screen and (height >= 1500px) {
+            max-height: 97vh;
+        }
+        @media screen and (height >= 1600px) {
+            max-height: 100vh;
+        }
+        /* @media screen and (height >= 1700px) {
+            max-height: 72vh;
+        } */
+    }
+    .bpHeight-3 {
+        max-height: 33vh;
+        @media screen and (height >= 320px) {
+            max-height: 35vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 41vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 47vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 52vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 55vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 61vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 64vh;
+        }
+
+        @media screen and (height >= 560px) {
+            max-height: 76vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 79vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 71vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 73vh;
+        }
+        @media screen and (height >= 750px) {
+            max-height: 76vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 79vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 81vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 83vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 86vh;
+        }
+
+        @media screen and (height >= 1100px) {
+            max-height: 87vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 90vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 93vh;
+        }
+        @media screen and (height >= 1500px) {
+            max-height: 96vh;
+        }
+        @media screen and (height >= 1600px) {
+            max-height: 100vh;
+        }
+        /* @media screen and (height >= 1700px) {
+            max-height: 72vh;
+        } */
+    }
+
+    .bpHeight-4 {
+        max-height: 15vh;
+        @media screen and (height >= 320px) {
+            max-height: 17vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 21vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 27vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 32vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 37vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 39vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 46vh;
+        }
+        @media screen and (height >= 560px) {
+            max-height: 49vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 52vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 48vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 52vh;
+        }
+        @media screen and (height >= 750px) {
+            max-height: 56vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 60vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 64vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 68vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 72vh;
+        }
+        @media screen and (height >= 1100px) {
+            max-height: 76vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 80vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 84vh;
+        }
+        @media screen and (height >= 1500px) {
+            max-height: 88vh;
+        }
+        @media screen and (height >= 1600px) {
+            max-height: 89vh;
+        }
+        @media screen and (height >= 1700px) {
+            max-height: 95vh;
+        }
+    }
+
+    .bpHeight-5 {
+        max-height: 17vh;
+        @media screen and (height >= 320px) {
+            max-height: 19vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 23vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 29vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 34vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 39vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 41vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 48vh;
+        }
+
+        @media screen and (height >= 560px) {
+            max-height: 51vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 54vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 50vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 54vh;
+        }
+        @media screen and (height >= 750px) {
+            max-height: 58vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 62vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 66vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 70vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 74vh;
+        }
+        @media screen and (height >= 1100px) {
+            max-height: 78vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 82vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 86vh;
+        }
+        @media screen and (height >= 1500px) {
+            max-height: 90vh;
+        }
+        @media screen and (height >= 1600px) {
+            max-height: 91vh;
+        }
+        @media screen and (height >= 1700px) {
+            max-height: 97vh;
+        }
+    }
+
+    .bpHeight-6 {
+        max-height: 20vh;
+        @media screen and (height >= 320px) {
+            max-height: 23vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 27vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 33vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 38vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 42vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 53vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 60vh;
+        }
+
+        @media screen and (height >= 560px) {
+            max-height: 64vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 66vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 62vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 66vh;
+        }
+        @media screen and (height >= 750px) {
+            max-height: 70vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 74vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 78vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 82vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 86vh;
+        }
+        @media screen and (height >= 1100px) {
+            max-height: 90vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 94vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 98vh;
+        }
+        @media screen and (height >= 1500px) {
+            max-height: 100vh;
+        }
+        /* @media screen and (height >= 1600px) {
+            max-height: 100vh;
+        } */
+        /* @media screen and (height >= 1700px) {
+            max-height: 72vh;
+        } */
+    }
+
+    .bpHeight-7 {
+        max-height: 25vh;
+        @media screen and (height >= 320px) {
+            max-height: 28vh;
+        }
+        @media screen and (height >= 360px) {
+            max-height: 32vh;
+        }
+        @media screen and (height >= 390px) {
+            max-height: 38vh;
+        }
+        @media screen and (height >= 420px) {
+            max-height: 43vh;
+        }
+        @media screen and (height >= 460px) {
+            max-height: 47vh;
+        }
+        @media screen and (height >= 490px) {
+            max-height: 58vh;
+        }
+        @media screen and (height >= 520px) {
+            max-height: 65vh;
+        }
+
+        @media screen and (height >= 560px) {
+            max-height: 70vh;
+        }
+        @media screen and (height >= 590px) {
+            max-height: 73vh;
+        }
+        @media screen and (height >= 620px) {
+            max-height: 67vh;
+        }
+        @media screen and (height >= 660px) {
+            max-height: 71vh;
+        }
+        @media screen and (height >= 750px) {
+            max-height: 75vh;
+        }
+        @media screen and (height >= 800px) {
+            max-height: 79vh;
+        }
+        @media screen and (height >= 850px) {
+            max-height: 83vh;
+        }
+        @media screen and (height >= 920px) {
+            max-height: 87vh;
+        }
+        @media screen and (height >= 990px) {
+            max-height: 91vh;
+        }
+        @media screen and (height >= 1100px) {
+            max-height: 95vh;
+        }
+        @media screen and (height >= 1200px) {
+            max-height: 99vh;
+        }
+        @media screen and (height >= 1400px) {
+            max-height: 100vh;
+        }
+        /* @media screen and (height >= 1500px) {
+            max-height: 100vh;
+        } */
+        /* @media screen and (height >= 1600px) {
+            max-height: 100vh;
+        } */
+        /* @media screen and (height >= 1700px) {
+            max-height: 72vh;
+        } */
+    }
+
+    /* hide before reload */
+    [x-cloak] {
+        display: none !important;
+    }
+
+    /* exclamation animation */
+    .animate-exclamation {
+        animation: exclamation 1.8s infinite linear;
+    }
+
+    @keyframes exclamation {
+        0% {
+            filter: drop-shadow(0 0 1px rgba(231, 0, 11, 0.3));
+        }
+        50% {
+            filter: drop-shadow(0 0 1px rgba(231, 0, 11, 0.3));
+        }
+        70% {
+            filter: drop-shadow(0 0 10px rgba(231, 0, 11, 1));
+        }
+
+        100% {
+            filter: drop-shadow(0 0 1px rgba(231, 0, 11, 0.3));
+        }
+    }
+
+    /* table set access */
+    .table-set-access {
+        tr td:before {
+            @apply bg-warnaBiruTua;
+            content: attr(data-cell) ' : ';
+            color: white;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 2px 3px;
+            margin-right: 5px;
+            border-radius: 2px;
+
+            @media screen and (width >= 360px) {
+                font-size: 0.75rem;
+            }
+            @media screen and (width >= 575px) {
+                display: none;
+            }
+        }
+    }
+}
