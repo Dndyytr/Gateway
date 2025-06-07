@@ -35,7 +35,7 @@
                 :class="{'w-3 shadow-2xl': $store.navbar?.isCollapsed ?? false }"
             ></span>
         </button>
-        <figure class="w-25 bp400:w-30 bp575:w-35 xl:w-40">
+        <figure class="w-25 bp400:w-30 bp575:w-35 xl:w-38 2xl:w-40">
             <img src="/img/logo.png" alt="gateway logo" />
         </figure>
         <p

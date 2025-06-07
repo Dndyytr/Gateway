@@ -52,10 +52,6 @@
             overflow-x: hidden;
             font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100%;
-
-            @media screen and (width >= 1024px) {
-                overflow: hidden;
-            }
         }
     </style>
 
@@ -85,7 +81,7 @@
                             })
                         })
                     "
-                    class="fixed top-18 z-99999 h-[90vh] min-w-[max-content] overflow-y-auto rounded-sm bg-warnaBiruTua p-3 transition-all duration-330 ease-in-out bp400:top-19 sm:top-13 lg:relative lg:top-0 lg:min-w-0 2xl:h-[95vh]"
+                    class="fixed top-18 z-99999 h-[90vh] min-w-[max-content] overflow-y-auto rounded-sm bg-warnaBiruTua p-3 transition-all duration-330 ease-in-out bp400:top-19 sm:top-13 lg:sticky lg:bottom-0 lg:min-w-0 2xl:h-[95vh]"
                     :class="{
                         'lg:w-[280px] 2xl:w-[284px]': !($store.navbar?.isCollapsed ?? false),
                         'lg:w-[45px]': $store.navbar?.isCollapsed ?? false,
