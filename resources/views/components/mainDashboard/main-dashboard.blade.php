@@ -1,7 +1,7 @@
 <div
     class="w-full rounded-sm bg-warnaBiruTua px-3 py-2 text-[.63rem] text-white bp360:text-[.65rem] bp400:text-[.7rem] bp575:text-xs lg:text-sm xl:text-base 2xl:text-lg"
 >
-    <h1 class="text-[1.5em] font-semibold">Hello, Gateway!</h1>
+    <h1 class="text-[1.5em] font-semibold">Hello, FMS Testing!</h1>
     <p class="font-medium">Here's what happening with your Gateway Customer Portal System Today</p>
     <hr class="mt-2 mb-1 rounded-xs border-t-[1.5px] text-warnaKuning" />
 </div>
