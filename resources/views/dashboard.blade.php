@@ -81,7 +81,7 @@
                             })
                         })
                     "
-                    class="fixed top-18 z-99999 h-[90vh] min-w-[max-content] overflow-y-auto rounded-sm bg-warnaBiruTua p-3 transition-all duration-330 ease-in-out bp400:top-19 sm:top-13 lg:sticky lg:bottom-0 lg:min-w-0 2xl:h-[95vh]"
+                    class="fixed top-18 z-99999 h-[90vh] min-w-[max-content] overflow-y-auto rounded-sm bg-warnaBiruTua px-3 pt-3 pb-6 transition-all duration-330 ease-in-out bp360:pb-4 bp400:top-19 sm:top-13 sm:pb-3 lg:sticky lg:bottom-0 lg:min-w-0 2xl:h-[95vh]"
                     :class="{
                         'lg:w-[280px] 2xl:w-[284px]': !($store.navbar?.isCollapsed ?? false),
                         'lg:w-[45px]': $store.navbar?.isCollapsed ?? false,
